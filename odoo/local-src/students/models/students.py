@@ -12,11 +12,6 @@ class StudentsTraining(models.Model):
         comodel_name="students.student",
         inverse_name="training_id",
     )
-    @api.constrains('code')
-    def _uq_training_code(self):
-        for record in self:
-            if self.env['students.training'].search([('code', '=', record.code)]):
-                raise ValidationError(_("Training code already exists, it must be unique"))
 
 class StudentsStudent(models.Model):
     _name = "students.student"

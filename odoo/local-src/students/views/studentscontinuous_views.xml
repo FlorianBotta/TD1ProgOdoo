@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <record model="ir.ui.view" id="students_studentcontinuous_view_form">
+<record model="ir.ui.view" id="students_studentcontinuous_view_form">
         <field name="name">students.continuous.form</field>
         <field name="model">students.studentcontinuous</field>
         <field name="type">form</field>
@@ -16,6 +16,7 @@
                             <field name="firstname"/>
                             <field name="lastname"/>
                             <field name="nationality"/>
+                            <field name="partner"/>
                         </group>
                         <group>
                             <field name="average"/>
@@ -37,9 +38,9 @@
             </form>
         </field>
     </record>
-    <record model="ir.ui.view" id="students_student_view_tree">
-        <field name="name">students.tree</field>
-        <field name="model">students.student</field>
+    <record model="ir.ui.view" id="students_studentcontinuous_view_tree">
+        <field name="name">students.continuous.tree</field>
+        <field name="model">students.studentcontinuous</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree string="Students">
@@ -52,14 +53,14 @@
         </field>
     </record>
     <record model="ir.actions.act_window" id="action_students_studentcontinuous_view">
-        <field name="name">Students</field>
+        <field name="name">StudentsContinuous</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">students.student</field>
+        <field name="res_model">students.studentcontinuous</field>
         <field name="view_mode">tree,form</field>
     </record>
 
 
     <menuitem id="students_studentcontinuous_menu" name="Student Continuous" parent="students_student_menu"
-              action="action_studentcontinuous_student_view"/>
+              action="action_students_studentcontinuous_view"/>
 
 </odoo>
