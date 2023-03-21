@@ -1,0 +1,68 @@
+<odoo>
+    <record id="action_students_transcript_report" model="ir.actions.report">
+        <field name="name">Students Transcript</field>
+        <field name="model">students.student</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">students.report_transcript</field>
+        <field name="paperformat_id" ref="base.paperformat_euro"/>
+        <field name="binding_model_id" ref="model_students_student"/>
+        <field name="binding_type">report</field>
+    </record>
+    <template id="report_transcript">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <h1>Transcript</h1>
+                        <h3>Student :</h3>
+                        <span t-field="o.firstname"/>
+                        <span t-field="o.lastname"/>
+                        <h3>Training :</h3>
+                        <span t-field="o.training_id.name"/>
+                        <h3>Marks :</h3>
+                        <table class="table table-sm">
+                            <thead style="display: table-row-group">
+                                <tr>
+                                    <th name="th_subject">
+                                        <strong>Subject</strong>
+                                    </th>
+                                    <th name="th_mark" class="text-center">
+                                        <strong>Mark</strong>
+                                    </th>
+                                    <th name="th_coeff" class="text-right">
+                                        <strong>Coefficient</strong>
+                                    </th>
+                                    <th name="th_weighted_mark" class="text-right">
+                                        <strong>Weighted Mark</strong>
+                                    </th>
+                                </tr>
+                            </thead>
+                           <tbody>
+                                <t t-foreach="o.mark_ids" t-as="mark">
+                                    <tr t-att-class="'bg-100 font-weight-bold o_line_section'">
+                                        <t t-if="mark.subject">
+                                            <td id="subject">
+                                                <span t-field="mark.subject"/>
+                                            </td>
+                                            <td id="mark" class="text-center">
+                                                <span t-field="mark.mark"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="mark.coefficient"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="mark.weighted_mark"/>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <h3>Grade point average : <span t-field="o.average"/></h3>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

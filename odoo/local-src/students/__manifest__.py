@@ -14,6 +14,7 @@
         "views/trainings_views.xml",
         "views/res_partner_views.xml",
         "views/notes_views.xml",
+        "reports/students_report.xml",
     ],
     "installable": True,
     "auto_install": False,
