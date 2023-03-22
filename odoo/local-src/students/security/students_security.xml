@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="category_student_management">
+            <field name="name">Student management</field>
+            <field name="sequence">200</field>
+        </record>
+
+        <record model="res.groups" id="group_students">
+            <field name="name">Students</field>
+            <field name="category_id" ref="category_student_management"/>
+        </record>
+
+        <record model="res.groups" id="group_teachers">
+            <field name="name">Teachers</field>
+            <field name="category_id" ref="category_student_management"/>
+        </record>
+
+         <record model="res.groups" id="group_studentcontinuous">
+            <field name="name">Students continuous</field>
+            <field name="category_id" ref="category_student_management"/>
+        </record>
+
+
+        <record model="ir.rule" id="students_mark_personal_rule">
+            <field name="name">Students view only their personal marks</field>
+            <field ref="model_students_mark" name="model_id"/>
+            <field name="domain_force">[('student_id.user_id', '=', user.id)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="groups" eval="[(4, ref('group_students'))]"/>
+        </record>
+
+
+        <record model="ir.rule" id="students_student_personal_rule">
+            <field name="name">Students is the only able to modified his data</field>
+            <field ref="model_students_student" name="model_id"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="groups" eval="[(4, ref('group_students'))]"/>
+        </record>
+
+
+    <record model="ir.rule" id="studentscontinuous_mark_personal_rule">
+                <field name="name">Students Continuous view only their personal marks</field>
+                <field ref="model_students_mark" name="model_id"/>
+                <field name="domain_force">[('student_id.user_id', '=', user.id)]</field>
+                <field name="perm_read" eval="True"/>
+                <field name="perm_write" eval="True"/>
+                <field name="perm_create" eval="False"/>
+                <field name="perm_unlink" eval="False"/>
+                <field name="groups" eval="[(4, ref('group_studentcontinuous'))]"/>
+            </record>
+
+        <record model="ir.rule" id="students_studentcontinuous_personal_rule">
+            <field name="name">Students is the only able to modified his data</field>
+            <field ref="model_students_studentcontinuous" name="model_id"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="groups" eval="[(4, ref('group_studentcontinuous'))]"/>
+        </record>
+
+
+
+
+
+    </data>
+</odoo>

@@ -33,9 +33,10 @@ class StudentsStudent(models.Model):
     average = fields.Float(
         string="Grade point average",
         compute="_compute_average",
+        store=True,
     )
 
-    @api.onchange("mark_ids")
+    @api.depends("mark_ids")
     def _compute_average(self):
         for record in self:
             average = 0

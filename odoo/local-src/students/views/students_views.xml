@@ -21,7 +21,7 @@
                             <field name="average"/>
                         </group>
                     </group>
-                     <notebook>
+                    <notebook>
                         <page string="Marks" name="Marks">
                             <field name="mark_ids">
                                 <tree editable="bottom">
@@ -57,10 +57,27 @@
         <field name="res_model">students.student</field>
         <field name="view_mode">tree,form</field>
     </record>
-
+    <record id="students_student_view_search" model="ir.ui.view">
+        <field name="name">students.search</field>
+        <field name="model">students.student</field>
+        <field name="arch" type="xml">
+            <search string="Search Students">
+                <filter name="filter_see_french" string="French students" domain="[('nationality.code','=','FR')]"/>
+                <filter name="filter_see_notfrench" string="Other nationality"
+                        domain="[('nationality.code','!=','FR')]"/>
+                <separator/>
+                <filter name="filter_see_notmark" string="Student Without Mark " domain="[('mark_ids','=',False)]"/>
+                <filter name="filter_see_markmorethan10" string="Graduating Students "
+                        domain="[('average','&gt;=',10)]"/>
+                <filter name="filter_see_marklessthan10" string="Non-Graduating Students "
+                        domain="[('average','&lt;=',10),  ('mark_ids','!=',False)]"/>
+            </search>
+        </field>
+    </record>
 
     <menuitem id="students_menu" name="Students"/>
-    <menuitem id="students_student_menu" name="Students" parent="students_menu" />
-    <menuitem id="students_students_menu" name="Students" parent="students_student_menu" action="action_students_student_view"/>
+    <menuitem id="students_student_menu" name="Students" parent="students_menu"/>
+    <menuitem id="students_students_menu" name="Students" parent="students_student_menu"
+              action="action_students_student_view"/>
 
 </odoo>

@@ -1,0 +1,4 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_students_mark_students","Access to StudentsMark by students","model_students_mark","group_students"
+"access_students_student_students","Access to StudentsStudent by students","model_students_student","group_students"
+"access_students_continuousstudent_students","Access to StudentsContinuousStudent by students","model_students_studentcontinuous","group_students"

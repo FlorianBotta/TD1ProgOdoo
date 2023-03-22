@@ -19,46 +19,53 @@
                         <span t-field="o.lastname"/>
                         <h3>Training :</h3>
                         <span t-field="o.training_id.name"/>
-                        <h3>Marks :</h3>
-                        <table class="table table-sm">
-                            <thead style="display: table-row-group">
-                                <tr>
-                                    <th name="th_subject">
-                                        <strong>Subject</strong>
-                                    </th>
-                                    <th name="th_mark" class="text-center">
-                                        <strong>Mark</strong>
-                                    </th>
-                                    <th name="th_coeff" class="text-right">
-                                        <strong>Coefficient</strong>
-                                    </th>
-                                    <th name="th_weighted_mark" class="text-right">
-                                        <strong>Weighted Mark</strong>
-                                    </th>
-                                </tr>
-                            </thead>
-                           <tbody>
-                                <t t-foreach="o.mark_ids" t-as="mark">
-                                    <tr t-att-class="'bg-100 font-weight-bold o_line_section'">
-                                        <t t-if="mark.subject">
-                                            <td id="subject">
-                                                <span t-field="mark.subject"/>
-                                            </td>
-                                            <td id="mark" class="text-center">
-                                                <span t-field="mark.mark"/>
-                                            </td>
-                                            <td class="text-right">
-                                                <span t-field="mark.coefficient"/>
-                                            </td>
-                                            <td class="text-right">
-                                                <span t-field="mark.weighted_mark"/>
-                                            </td>
-                                        </t>
+                        <t t-if="o.mark_ids">
+                            <h3>Marks :</h3>
+                            <table class="table table-sm">
+                                <thead style="display: table-row-group">
+                                    <tr>
+                                        <th name="th_subject">
+                                            <strong>Subject</strong>
+                                        </th>
+                                        <th name="th_mark" class="text-center">
+                                            <strong>Mark</strong>
+                                        </th>
+                                        <th name="th_coeff" class="text-right">
+                                            <strong>Coefficient</strong>
+                                        </th>
+                                        <th name="th_weighted_mark" class="text-right">
+                                            <strong>Weighted Mark</strong>
+                                        </th>
                                     </tr>
-                                </t>
-                            </tbody>
-                        </table>
-                        <h3>Grade point average : <span t-field="o.average"/></h3>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.mark_ids" t-as="mark">
+                                        <tr t-att-class="'bg-100 font-weight-bold o_line_section'">
+                                            <t t-if="mark.subject">
+                                                <td id="subject">
+                                                    <span t-field="mark.subject"/>
+                                                </td>
+                                                <td id="mark" class="text-center">
+                                                    <span t-field="mark.mark"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-field="mark.coefficient"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-field="mark.weighted_mark"/>
+                                                </td>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <h3>Grade point average :
+                                <span t-field="o.average"/>
+                            </h3>
+                        </t>
+                        <t t-else="">
+                            <h2>No marks</h2>
+                        </t>
 
                     </div>
                 </t>
