@@ -1,6 +1,7 @@
 from odoo import fields, models, api, _
 from odoo.exceptions import ValidationError
 
+
 class StudentsTraining(models.Model):
     _name = "students.training"
     _description = "Training table"
@@ -13,18 +14,19 @@ class StudentsTraining(models.Model):
         inverse_name="training_id",
     )
 
+
 class StudentsStudent(models.Model):
     _name = "students.student"
     _description = "Student table"
-    def name_get(self):
-        result = []
-        for record in self:
-            name = record.firstname + ' ' + record.lastname
-            result.append((record.id, name))
-        return result
+
     number = fields.Char("Student number", size=11, required=True)
     firstname = fields.Char("Student firstname", size=64, required=True)
     lastname = fields.Char("Student lastname", size=64, required=True)
+
+    user_id = fields.Many2one(
+        string="User",
+        comodel_name="res.users",
+    )
     nationality = fields.Many2one(
         string="Nationality",
         comodel_name="res.country",
@@ -36,6 +38,13 @@ class StudentsStudent(models.Model):
         store=True,
     )
 
+    def name_get(self):
+        result = []
+        for record in self:
+            name = record.firstname + ' ' + record.lastname
+            result.append((record.id, name))
+        return result
+
     @api.depends("mark_ids")
     def _compute_average(self):
         for record in self:
@@ -43,9 +52,10 @@ class StudentsStudent(models.Model):
             if record.mark_ids:
                 total_coeff = sum(int(m.coefficient) for m in record.mark_ids)
                 total_mark = sum(m.weighted_mark for m in record.mark_ids)
-                if total_coeff !=0:
+                if total_coeff != 0:
                     average = total_mark / total_coeff
             record.average = average
+
     training_id = fields.Many2one(
         string="Training",
         comodel_name="students.training",
@@ -58,6 +68,7 @@ class StudentsStudent(models.Model):
     )
 
 
+
 class StudentsMarks(models.Model):
     _name = "students.mark"
     _description = "Marks table"
@@ -65,7 +76,7 @@ class StudentsMarks(models.Model):
     mark = fields.Float("Mark", required=True)
     coefficient = fields.Selection(
         string="Coefficient",
-        selection=[('1',"1"), ('2',"2"),('3',"3"), ('5',"5")],
+        selection=[('1', "1"), ('2', "2"), ('3', "3"), ('5', "5")],
         index=True,
         default="1",
         help="Select a coefficient in the list",
@@ -75,21 +86,25 @@ class StudentsMarks(models.Model):
         string="Weighted Mark",
         compute='_compute_weighted',
     )
-    @api.onchange("mark","coefficient")
+
+    @api.onchange("mark", "coefficient")
     def _compute_weighted(self):
         for record in self:
             record.weighted_mark = record.mark * int(record.coefficient)
+
     student_id = fields.Many2one(
         string="Students Marks",
         comodel_name="students.student",
         ondelete="cascade",
         required=True,
     )
+
     @api.constrains('mark')
     def _check_mark_valid(self):
         for record in self:
             if record.mark < 0 or record.mark > 20:
                 raise ValidationError(_("Mark should be between 0 and 20"))
+
 
 class StudentsStudentContinuous(models.Model):
     _name = 'students.studentcontinuous'

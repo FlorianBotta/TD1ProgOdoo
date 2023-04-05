@@ -1,4 +1,10 @@
 "id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
-"access_students_mark_students","Access to StudentsMark by students","model_students_mark","group_students"
-"access_students_student_students","Access to StudentsStudent by students","model_students_student","group_students"
-"access_students_continuousstudent_students","Access to StudentsContinuousStudent by students","model_students_studentcontinuous","group_students"
+"access_students_mark_students","Access to StudentsMark by students","model_students_mark","group_students",1,0,0,0
+"access_students_student_students","Access to StudentsStudent by students","model_students_student","group_students",1,1,0,0
+"access_students_continuousstudent_students","Access to StudentsContinuousStudent by students","model_students_studentcontinuous","group_students",1,1,0,0
+"access_teachers_mark_students","Access to StudentsMark by teachers","model_students_mark","group_teachers",1,1,1,1
+"access_teachers_student_students","Access to StudentsStudent by teachers","model_students_student","group_teachers",1,1,1,1
+"access_teachers_continuousstudent_students","Access to StudentsContinuousStudent by teachers","model_students_studentcontinuous","group_teachers",1,1,1,1
+"access_studentcontinuous_mark_students","Access to StudentsMark by studentcontinuous","model_students_mark","group_studentcontinuous",1,0,0,0
+"access_studentcontinuous_student_students","Access to StudentsStudent by studentcontinuous","model_students_student","group_studentcontinuous",1,1,0,0
+"access_studentcontinuous_continuousstudent_students","Access to StudentsContinuousStudent by studentcontinuous","model_students_studentcontinuous","group_studentcontinuous",1,1,0,0

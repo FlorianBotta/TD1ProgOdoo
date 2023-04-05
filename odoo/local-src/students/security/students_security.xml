@@ -22,6 +22,8 @@
         </record>
 
 
+
+
         <record model="ir.rule" id="students_mark_personal_rule">
             <field name="name">Students view only their personal marks</field>
             <field ref="model_students_mark" name="model_id"/>
@@ -35,7 +37,7 @@
 
 
         <record model="ir.rule" id="students_student_personal_rule">
-            <field name="name">Students is the only able to modified his data</field>
+            <field name="name">Students is the only able to modified his mark</field>
             <field ref="model_students_student" name="model_id"/>
             <field name="domain_force">[('user_id', '=', user.id)]</field>
             <field name="perm_read" eval="True"/>
@@ -58,7 +60,7 @@
             </record>
 
         <record model="ir.rule" id="students_studentcontinuous_personal_rule">
-            <field name="name">Students is the only able to modified his data</field>
+            <field name="name">Students is the only able to modified his mark</field>
             <field ref="model_students_studentcontinuous" name="model_id"/>
             <field name="domain_force">[('user_id', '=', user.id)]</field>
             <field name="perm_read" eval="True"/>
@@ -67,10 +69,5 @@
             <field name="perm_unlink" eval="False"/>
             <field name="groups" eval="[(4, ref('group_studentcontinuous'))]"/>
         </record>
-
-
-
-
-
     </data>
 </odoo>

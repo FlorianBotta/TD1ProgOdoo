@@ -11,6 +11,7 @@
                         <group>
                             <field name="number"/>
                             <field name="training_id"/>
+                            <field name="user_id" />
                         </group>
                         <group>
                             <field name="firstname"/>
